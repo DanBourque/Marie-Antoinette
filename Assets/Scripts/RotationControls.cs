@@ -20,6 +20,6 @@ public class RotationControls: MonoBehaviour{
 				rotationSlider.SetValueWithoutNotify( 0 );
 		}
 
-		transform.localRotation = Quaternion.Euler( 0, rotationSlider.value*360, 0 );
+		transform.localRotation = Quaternion.Euler( 0, -rotationSlider.value*360, 0 );
 	}
 }
