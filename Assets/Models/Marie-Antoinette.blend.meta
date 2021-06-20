@@ -3,7 +3,17 @@ guid: 7e5674f1097494d4b906bc731126d474
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bifurcation
+    second: {fileID: 2100000, guid: 7d722e2c6b84cc0448e97730c9c0766a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Marie-Antoinette
+    second: {fileID: 2100000, guid: db33c2e5c6863494ebdebb60e82535a9, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
