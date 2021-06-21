@@ -1,25 +1,17 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class RotationControls: MonoBehaviour{
-	public Slider rotationSlider;
-	public Toggle autoRotateToggle;
-	public float autoRotationSpeed = .001f;
-
-	private void Awake(){
-		rotationSlider.onValueChanged.AddListener( value => {
-			if( autoRotateToggle.isOn )
-				autoRotateToggle.isOn = false;		// Stop auto-rotating.
-		} );
-	}
+	private Vector3 prevMousePos = Vector3.zero, mousePosDelta = Vector3.zero;
 
 	private void Update(){
-		if( autoRotateToggle.isOn ){
-			rotationSlider.SetValueWithoutNotify( rotationSlider.value+autoRotationSpeed );
-			if( rotationSlider.value >= rotationSlider.maxValue )
-				rotationSlider.SetValueWithoutNotify( 0 );
+		if( Input.GetMouseButton( 0 ) ){
+			mousePosDelta = Input.mousePosition - prevMousePos;
+			if( Vector3.Dot( transform.up, Vector3.up ) > 0 )
+				transform.Rotate( transform.up, -Vector3.Dot( mousePosDelta, Camera.main.transform.right ), Space.World );
+			else
+				transform.Rotate( transform.up, Vector3.Dot( mousePosDelta, Camera.main.transform.right ), Space.World );
+			transform.Rotate( Camera.main.transform.right, Vector3.Dot( mousePosDelta, Camera.main.transform.up ), Space.World );
 		}
-
-		transform.localRotation = Quaternion.Euler( 0, -rotationSlider.value*360, 0 );
+		prevMousePos = Input.mousePosition;
 	}
 }
