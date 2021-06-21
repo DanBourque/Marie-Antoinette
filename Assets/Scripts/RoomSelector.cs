@@ -3,7 +3,7 @@ using UnityEngine;
 public enum Room{ ChainLocker, EngineRoom, Galley, GuestCabin, Quarters, Sailroom, Salon }
 
 public class RoomSelector: MonoBehaviour{
-	private const float SmoothTime = .01f, deckExpandedY = 1.73f, hullExpandedY = -2.91f, expandedScale = 1.5f;
+	private const float SmoothTime = 3, deckExpandedY = 1.73f, hullExpandedY = -2.91f, expandedScale = 1.5f;
 	public Transform ship, hull, deck, spotlight;
 	public GameObject[] rooms;
 	private Vector3[] roomAnchors;
@@ -51,12 +51,17 @@ public class RoomSelector: MonoBehaviour{
 	}
 
 	private void Update(){
+		var time = SmoothTime*Time.deltaTime;
+
 		for( var r=0; r<rooms.Length; r++ ){
-			rooms[ r ].transform.localPosition = Vector3.Lerp( rooms[ r ].transform.localPosition, roomPosTargets[ r ], SmoothTime );
-			rooms[ r ].transform.localScale	= Vector3.Lerp( rooms[ r ].transform.localScale, roomScaleTargets[ r ], SmoothTime );
+			rooms[ r ].transform.localPosition = Vector3.Lerp( rooms[ r ].transform.localPosition, roomPosTargets[ r ], time );
+			var @in = rooms[ r ].transform.Find( "in" );
+			var @out = rooms[ r ].transform.Find( "out" );
+			@in.localScale	= Vector3.Lerp( @in.localScale, roomScaleTargets[ r ], time );
+			@out.localScale	= Vector3.Lerp( @out.localScale, roomScaleTargets[ r ], time );
 		}
 
-		deck.transform.localPosition = Vector3.Lerp( deck.transform.localPosition, deckPosTarget, SmoothTime );
-		hull.transform.localPosition = Vector3.Lerp( hull.transform.localPosition, hullPosTarget, SmoothTime );
+		deck.transform.localPosition = Vector3.Lerp( deck.transform.localPosition, deckPosTarget, time );
+		hull.transform.localPosition = Vector3.Lerp( hull.transform.localPosition, hullPosTarget, time );
 	}
 }
