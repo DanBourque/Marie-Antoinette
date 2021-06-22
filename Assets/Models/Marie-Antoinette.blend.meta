@@ -12,6 +12,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Deck
+    second: {fileID: 2100000, guid: a6c94b1c2604c73409a22ce24b133d1b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Marie-Antoinette
     second: {fileID: 2100000, guid: db33c2e5c6863494ebdebb60e82535a9, type: 2}
   materials:
