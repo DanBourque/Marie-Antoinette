@@ -10,7 +10,7 @@ public class RoomSelector: MonoBehaviour{
 	private Vector3[] roomPosTargets;
 	private Vector3[] roomScaleTargets;
 	private Vector3 hullPosTarget, deckPosTarget;
-	public RectTransform slideoutToggle, slideoutPanel;
+	public RectTransform slideoutPanel;
 	private bool isSlideoutVisible = true;
 
 	private void Awake(){
@@ -54,7 +54,6 @@ public class RoomSelector: MonoBehaviour{
 	public void OnSectionsSlideout(){
 		isSlideoutVisible = !isSlideoutVisible;
 		slideoutPanel.anchoredPosition = new Vector2( isSlideoutVisible ? 0 : slideoutPanel.rect.width, 0 );
-		slideoutToggle.anchoredPosition = new Vector2( isSlideoutVisible ? -slideoutPanel.rect.width : 0, 0 );
 	}
 
 	private void Update(){
