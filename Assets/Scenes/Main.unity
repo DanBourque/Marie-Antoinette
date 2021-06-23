@@ -2742,7 +2742,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1514331158}
   toggleTransition: 1
   graphic: {fileID: 1855329389}
-  m_Group: {fileID: 1542442124}
+  m_Group: {fileID: 1731311622}
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -3003,7 +3003,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1557323243}
   toggleTransition: 1
   graphic: {fileID: 1303781888}
-  m_Group: {fileID: 1542442124}
+  m_Group: {fileID: 1731311622}
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
