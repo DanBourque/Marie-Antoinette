@@ -3,6 +3,7 @@ using UnityEngine;
 public enum Room{ ChainLocker, EngineRoom, Galley, GuestCabin, Quarters, Sailroom, Salon }
 
 public class RoomSelector: MonoBehaviour{
+	public Transform[] hullFins;
 	private const float SmoothTime = 3, deckExpandedY = 1.73f, hullExpandedY = -2.91f, expandedScale = 1.5f;
 	public Transform hull, deck, spotlight;
 	public GameObject[] rooms;
@@ -21,6 +22,8 @@ public class RoomSelector: MonoBehaviour{
 			roomAnchors[ r ] = roomPosTargets[ r ] = rooms[ r ].transform.localPosition;
 			roomScaleTargets[ r ] = Vector3.one;
 		}
+		foreach( var hullFin in hullFins )
+			hullFin.parent = hull;
 		OnSectionsSlideout();
 	}
 

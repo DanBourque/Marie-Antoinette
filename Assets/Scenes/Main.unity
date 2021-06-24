@@ -504,6 +504,16 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 321202447}
   m_CullTransparentMesh: 1
+--- !u!4 &409071157 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -5775271587381946659, guid: 7e5674f1097494d4b906bc731126d474, type: 3}
+  m_PrefabInstance: {fileID: 2086437199}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &451647333 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8897671500055413802, guid: 7e5674f1097494d4b906bc731126d474, type: 3}
+  m_PrefabInstance: {fileID: 2086437199}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &531423461 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4313947802850157678, guid: 7e5674f1097494d4b906bc731126d474, type: 3}
@@ -2875,6 +2885,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9fc2814dbb221241a47ea8cee6d7592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hullFins:
+  - {fileID: 451647333}
+  - {fileID: 409071157}
   hull: {fileID: 2086437204}
   deck: {fileID: 2086437208}
   spotlight: {fileID: 604305798}
@@ -3769,18 +3782,6 @@ PrefabInstance:
       value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -1199768853171278390, guid: 7e5674f1097494d4b906bc731126d474, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -1199768853171278390, guid: 7e5674f1097494d4b906bc731126d474, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -1199768853171278390, guid: 7e5674f1097494d4b906bc731126d474, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -1199768853171278390, guid: 7e5674f1097494d4b906bc731126d474, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -90
       objectReference: {fileID: 0}
@@ -3820,6 +3821,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d88414a5e167f1c4290624d5ffdf2107, type: 2}
+    - target: {fileID: 2807749132472658097, guid: 7e5674f1097494d4b906bc731126d474, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3688428644829247244, guid: 7e5674f1097494d4b906bc731126d474, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -3989,6 +3994,8 @@ MonoBehaviour:
   - {fileID: 2086437208}
   - {fileID: 2086437204}
   - {fileID: 531423461}
+  - {fileID: 451647333}
+  - {fileID: 409071157}
   invertedMaterial: {fileID: 2100000, guid: 97aacbdfd275bf64dbbfa0b7d5c8802b, type: 2}
   shellInsideMaterial: {fileID: 2100000, guid: b988ad32456ae6c4f88ac6975dec4640, type: 2}
 --- !u!1 &2115068985
