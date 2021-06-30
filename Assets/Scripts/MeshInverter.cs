@@ -1,21 +1,15 @@
-using System.Linq;
 using UnityEngine;
 
 public class MeshInverter: MonoBehaviour{
-	public Transform[] shellParts;
-	public Material invertedMaterial, shellInsideMaterial;
+	public Transform[] parts;
+	public Material invertedMaterial;
 
 	private void Start(){
-
-		foreach( Transform child in transform ){
+		foreach( Transform child in parts ){
 			var clone = Instantiate( child, child );
 			clone.transform.localPosition = Vector3.zero;
 			clone.transform.localRotation = Quaternion.identity;
-
-			if( shellParts.Contains( child ) )
-				clone.GetComponent< Renderer >().material = shellInsideMaterial;
-			else
-				clone.GetComponent< Renderer >().material = invertedMaterial;
+			clone.GetComponent< Renderer >().material = invertedMaterial;
 		}
 	}
 }
