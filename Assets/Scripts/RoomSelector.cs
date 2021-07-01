@@ -18,7 +18,7 @@ public class RoomSelector: MonoBehaviour{
 		roomPosTargets = new Vector3[ rooms.Length ];
 		roomScaleTargets = new Vector3[ rooms.Length ];
 		for( var r=0; r<roomAnchors.Length; r++ ){		// Record the original anchors for animation purposes.
-			roomAnchors[ r ] = roomPosTargets[ r ] = rooms[ r ].transform.localPosition;
+			roomAnchors[ r ] = roomPosTargets[ r ] = rooms[ r ].transform.position;
 			roomScaleTargets[ r ] = Vector3.one;
 		}
 		OnSectionsSlideout();
@@ -60,7 +60,7 @@ public class RoomSelector: MonoBehaviour{
 		var time = SmoothTime*Time.deltaTime;
 
 		for( var r=0; r<rooms.Length; r++ ){
-			rooms[ r ].transform.localPosition = Vector3.Lerp( rooms[ r ].transform.localPosition, roomPosTargets[ r ], time );
+			rooms[ r ].transform.position = Vector3.Lerp( rooms[ r ].transform.position, roomPosTargets[ r ], time );
 			rooms[ r ].transform.localScale	= Vector3.Lerp( rooms[ r ].transform.localScale, roomScaleTargets[ r ], time );
 		}
 
