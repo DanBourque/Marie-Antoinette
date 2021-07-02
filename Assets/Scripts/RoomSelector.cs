@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum Room{ ChainLocker, EngineRoom, Galley, GuestCabin, Quarters, Sailroom, Salon }
 
@@ -6,12 +7,15 @@ public class RoomSelector: MonoBehaviour{
 	private const float SmoothTime = 3, deckExpandedY = 1.73f, hullExpandedY = -2.91f, expandedScale = 1.5f;
 	public Transform hull, deck, spotlight;
 	public GameObject[] rooms;
+	public RectTransform[] photoStrips;
+	private RectTransform defaultPhotoStrip;
+	public ScrollRect photosScrollRect;
 	private Vector3[] roomAnchors;
 	private Vector3[] roomPosTargets;
 	private Vector3[] roomScaleTargets;
 	private Vector3 hullPosTarget, deckPosTarget;
-	public RectTransform slideoutPanel;
-	private bool isSlideoutVisible = true;
+	public RectTransform roomsSlideoutPanel, photosSlideoutPanel;
+	private bool isRoomsSlideoutVisible = true, isPhotosSlideoutVisible = true;
 
 	private void Awake(){
 		roomAnchors = new Vector3[ rooms.Length ];
@@ -21,7 +25,9 @@ public class RoomSelector: MonoBehaviour{
 			roomAnchors[ r ] = roomPosTargets[ r ] = rooms[ r ].transform.position;
 			roomScaleTargets[ r ] = Vector3.one;
 		}
-		OnSectionsSlideout();
+		defaultPhotoStrip = photosScrollRect.content;
+		OnRoomsSlideout();
+		OnPhotosSlideout();
 	}
 
 	public void OnChainLocker( bool isOn ) => SelectRoom( Room.ChainLocker, isOn );
@@ -49,11 +55,21 @@ public class RoomSelector: MonoBehaviour{
 			}
 			deckPosTarget = hullPosTarget = Vector3.zero;
 		}
+
+		for( var r=0; r<photoStrips.Length; r++ )
+			photoStrips[ r ].gameObject.SetActive( isOn ? r==( int )room : false );
+		defaultPhotoStrip.gameObject.SetActive( !isOn );
+		photosScrollRect.content = isOn ? photoStrips[ ( int )room ] : defaultPhotoStrip;
 	}
 
-	public void OnSectionsSlideout(){
-		isSlideoutVisible = !isSlideoutVisible;
-		slideoutPanel.anchoredPosition = new Vector2( isSlideoutVisible ? 0 : slideoutPanel.rect.width, 0 );
+	public void OnRoomsSlideout(){
+		isRoomsSlideoutVisible = !isRoomsSlideoutVisible;
+		roomsSlideoutPanel.anchoredPosition = new Vector2( isRoomsSlideoutVisible ? 0 : -roomsSlideoutPanel.rect.width, 0 );
+	}
+
+	public void OnPhotosSlideout(){
+		isPhotosSlideoutVisible = !isPhotosSlideoutVisible;
+		photosSlideoutPanel.anchoredPosition = new Vector2( isPhotosSlideoutVisible ? 0 : photosSlideoutPanel.rect.width, 0 );
 	}
 
 	private void Update(){
