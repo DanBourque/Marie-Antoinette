@@ -27,8 +27,16 @@ public class PhotosFetcher: MonoBehaviour{
 					if( line.StartsWith( FilenameLinePreamble ) ){
 						var filename = line.Substring( FilenameLinePreamble.Length ).Trim( new []{ '"', ',' } );
 						var photo = Instantiate( photoPrefab, transform );
+						var toggle = photo.GetComponent< Toggle >();
 						photo.name = filename;
-						photo.GetComponent< Toggle >().group = toggleGroup;
+						toggle.group = toggleGroup;
+						if( filename.Contains( "@" ) ){
+							var coords = filename.Substring( 0, filename.Length-6 ).Substring( filename.IndexOf( "(" )+1 ).Split( new []{ ',' } );
+							var photoLocator = photo.AddComponent< PhotoLocator >();
+							photoLocator.GPosition = new Vector3( float.Parse( coords[ 0 ] ), float.Parse( coords[ 1 ] ), float.Parse( coords[ 2 ] ) );
+							toggle.onValueChanged.AddListener( isOn => photoLocator.IsOn = isOn );
+						}else
+							toggle.onValueChanged.AddListener( isOn => toggle.isOn = false );		// Since the filename didn't contain coords, we have nothing to display.
 						StartCoroutine( LoadFromWeb( photo, GitHubPhotoPreamble+name+"/"+filename ) );
 					}
 					line = reader.ReadLine();
