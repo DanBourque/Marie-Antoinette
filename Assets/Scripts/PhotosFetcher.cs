@@ -3,19 +3,18 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.Collections;
 using static UnityEngine.Networking.UnityWebRequest;
-using System.IO;
 
 public class PhotosFetcher: MonoBehaviour{
-	private const string GDrivePreamble = "https://drive.google.com/uc?export=download&id=";
+	private const string GitHubRepoPreamble = "https://github.com/DanBourque/Marie-Antoinette/raw/main/Resources/Photos/";
 	public GameObject photoPrefab;
-	public string[] photoGDriveIDs;
+	public string[] photoAddrs;
 
 	void Start(){
 		var toggleGroup = GetComponent< ToggleGroup >();
-		foreach( var photoGDriveID in photoGDriveIDs ){
+		foreach( var photoAddr in photoAddrs ){
 			var photo = Instantiate( photoPrefab, transform );
 			photo.GetComponent< Toggle >().group = toggleGroup;
-			StartCoroutine( LoadFromWeb( photo, GDrivePreamble+photoGDriveID ) );
+			StartCoroutine( LoadFromWeb( photo, GitHubRepoPreamble+photoAddr ) );
 		}
 	}
 

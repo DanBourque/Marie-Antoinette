@@ -2483,10 +2483,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   photoPrefab: {fileID: 2494735039075924425, guid: 5181a9fe38d21ba48951f961baa50a70, type: 3}
-  photoGDriveIDs:
-  - 1bBQDyOOyO8PHOhedgfvZR6xN35keD3sG
-  - 1I1TI0fb0LHkORCyB7BjV0qcc0UTFpyIs
-  - 1OWO57Uf1KFU5Dgj9ZeEC7NqNmB6YSBrM
+  photoAddrs:
+  - Outside/02.jpg
+  - Outside/06.jpg
+  - Outside/12.jpg
 --- !u!1001 &737863371
 PrefabInstance:
   m_ObjectHideFlags: 0
