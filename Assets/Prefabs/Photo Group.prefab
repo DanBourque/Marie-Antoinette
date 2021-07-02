@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7448136141902708835}
   - component: {fileID: 7448136141902708836}
   - component: {fileID: 7448136141902708834}
+  - component: {fileID: 5931745284149669168}
   m_Layer: 5
   m_Name: Photo Group
   m_TagString: Untagged
@@ -91,3 +92,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &5931745284149669168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7448136141902708838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4e84b35f87411449dacbc8c3ce7761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  photoPrefab: {fileID: 2494735039075924425, guid: 5181a9fe38d21ba48951f961baa50a70, type: 3}
+  roomName: Outside
+  photoAddrs:
+  - Outside/02.jpg
+  - Outside/06.jpg
+  - Outside/12.jpg
