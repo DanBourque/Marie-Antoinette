@@ -6,6 +6,7 @@ public class PhotoLocator: MonoBehaviour{
 
 	private void Update(){
 		if( IsOn ){
+			// Update the mesh's vertices 
 		}
 	}
 }
