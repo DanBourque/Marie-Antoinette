@@ -2460,33 +2460,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 707907948}
   m_CullTransparentMesh: 1
---- !u!1 &726889809 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7448136141902708838, guid: 8254a5df2865703418a9e4d85c1e38de, type: 3}
-  m_PrefabInstance: {fileID: 7448136141545370935}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &726889810 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7448136141902708837, guid: 8254a5df2865703418a9e4d85c1e38de, type: 3}
   m_PrefabInstance: {fileID: 7448136141545370935}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &726889812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 726889809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed4e84b35f87411449dacbc8c3ce7761, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  photoPrefab: {fileID: 2494735039075924425, guid: 5181a9fe38d21ba48951f961baa50a70, type: 3}
-  photoAddrs:
-  - Outside/02.jpg
-  - Outside/06.jpg
-  - Outside/12.jpg
 --- !u!1001 &737863371
 PrefabInstance:
   m_ObjectHideFlags: 0

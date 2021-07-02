@@ -3,33 +3,37 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.Collections;
 using static UnityEngine.Networking.UnityWebRequest;
+using System.IO;
 
 public class PhotosFetcher: MonoBehaviour{
 	private const string GitHubPhotoPreamble = "https://danbourque.github.io/Marie-Antoinette/Photos/";
 	private const string GitHubFolderPreamble = "https://api.github.com/repos/DanBourque/Marie-Antoinette/contents/docs/Photos/";
+	private const string FilenameLinePreamble = "    \"name\": ";
 	public GameObject photoPrefab;
-	public string roomName;
-	public string[] photoAddrs;
+	private float PhotoWidth;
 
-	void Start(){
-		var toggleGroup = GetComponent< ToggleGroup >();
+	void Start() => StartCoroutine( GetPhotoList( GetComponent< ToggleGroup >() ) );
 
-		StartCoroutine( GetPhotoList( GitHubFolderPreamble+roomName ) );
-
-		foreach( var photoAddr in photoAddrs ){
-			var photo = Instantiate( photoPrefab, transform );
-			photo.GetComponent< Toggle >().group = toggleGroup;
-			StartCoroutine( LoadFromWeb( photo, GitHubPhotoPreamble+photoAddr ) );
-		}
-	}
-
-	IEnumerator GetPhotoList( string url ){
-		var webRequest = new UnityWebRequest( url );
+	IEnumerator GetPhotoList( ToggleGroup toggleGroup ){
+		PhotoWidth = ( photoPrefab.transform as RectTransform ).rect.width;
+		var webRequest = new UnityWebRequest( GitHubFolderPreamble+name );
 		webRequest.downloadHandler = new DownloadHandlerBuffer();
-		webRequest.SetRequestHeader( "Accept", "application/vnd.github.v3+json" );
+		webRequest.SetRequestHeader( "Accept", "application/vnd.github.v3+json" );	// Not necessary, but recommended by GitHub.
 		yield return webRequest.SendWebRequest();
 		if( webRequest.result==Result.Success ){
-			Debug.Log( webRequest.downloadHandler.text );
+			using( StringReader reader = new StringReader( webRequest.downloadHandler.text ) ){
+				var line = reader.ReadLine();
+				while( line!=null ){
+					if( line.StartsWith( FilenameLinePreamble ) ){
+						var filename = line.Substring( FilenameLinePreamble.Length ).Trim( new []{ '"', ',' } );
+						var photo = Instantiate( photoPrefab, transform );
+						photo.name = filename;
+						photo.GetComponent< Toggle >().group = toggleGroup;
+						StartCoroutine( LoadFromWeb( photo, GitHubPhotoPreamble+name+"/"+filename ) );
+					}
+					line = reader.ReadLine();
+				}
+			}
 		}
 	}
 
@@ -40,9 +44,10 @@ public class PhotosFetcher: MonoBehaviour{
 		yield return webRequest.SendWebRequest();
 		if( webRequest.result==Result.Success ){
 			Texture2D tex = texDownloadHandler.texture;
-			photo.GetComponent< Image >().sprite = Sprite.Create( tex, new Rect( 0, 0, tex.width, tex.height ), Vector2.zero, 1f );
-			float height = 124;
-			( photo.transform as RectTransform ).SetSizeWithCurrentAnchors( RectTransform.Axis.Vertical, height );
+			var img = photo.GetComponent< Image >();
+			img.type = Image.Type.Simple;
+			img.sprite = Sprite.Create( tex, new Rect( 0, 0, tex.width, tex.height ), Vector2.zero, 1f );
+			( photo.transform as RectTransform ).SetSizeWithCurrentAnchors( RectTransform.Axis.Vertical, tex.height*PhotoWidth/tex.width );
 		}
 	}
 }
