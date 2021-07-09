@@ -3,7 +3,132 @@ guid: 7e5674f1097494d4b906bc731126d474
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 18 - Default
+    second: {fileID: 2100000, guid: 8326174e3f130414383c5ab317c306aa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cabin Top Material
+    second: {fileID: 2100000, guid: 857c54f110c71664f8c0a89c9da3aabd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chain Locker Material
+    second: {fileID: 2100000, guid: f925920f9aeffa14f9b1f0e126803fc2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cockpit Material
+    second: {fileID: 2100000, guid: 82115386ae022c945ade8db49873e478, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Deck Material
+    second: {fileID: 2100000, guid: f3cc578377dc8864a8d71420923fbaa9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Engine Room Material
+    second: {fileID: 2100000, guid: 02bdf68b9246de947b23b82883fa1b7f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Galley Material
+    second: {fileID: 2100000, guid: 1db11ac302f4ba14397c2139e5bea114, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass
+    second: {fileID: 2100000, guid: c8011b7a285b18f48a5415feabd9164a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Guest Cabin Material
+    second: {fileID: 2100000, guid: 97bfcc405353e8c4dadf1bc440e7b5a6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Guest Head Material
+    second: {fileID: 2100000, guid: 989dbdecaf5c6c549b47f2e743faaf30, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hull Material
+    second: {fileID: 2100000, guid: dba2d4a215d848244b742209f681e78b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Marie-Antoinette Material
+    second: {fileID: 2100000, guid: 6b74836b3d856c847a7698f9a0880371, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Plastic_Clear_.001
+    second: {fileID: 2100000, guid: 0cedc79103dede04684e3520f270d1f2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Propeller Material
+    second: {fileID: 2100000, guid: 0dc35b13c7d23c1499937ad67e44482e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Quarters Material
+    second: {fileID: 2100000, guid: a49e29f1f1347ce46aaf9df582690511, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sailroom Material
+    second: {fileID: 2100000, guid: f2c90fb92dd38f744a5d573f469e9d31, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Salon Material
+    second: {fileID: 2100000, guid: 89a2411cee4a8394d982fcaee0010b8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stern Material
+    second: {fileID: 2100000, guid: 0543b5deee2fda54b8cb815108b150b7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Utility Closet Material
+    second: {fileID: 2100000, guid: 801673f2db9bc05458959343a029a112, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Washing Machine Material
+    second: {fileID: 2100000, guid: 6e2189b1a08626b4c89fdf50e3eee4fe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ceramika_1
+    second: {fileID: 2100000, guid: 1ef416983e793924b87f7e2246bd4196, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: chrome.001
+    second: {fileID: 2100000, guid: 23032d8a412ae25418232367f57c9107, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: simple_metal_0_88
+    second: {fileID: 2100000, guid: 4b5801b4864486341b04a479cf9e8ab0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: stainless_steel
+    second: {fileID: 2100000, guid: bf607615f5e32bd4996bfce7ce869124, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: stainless_steel.001
+    second: {fileID: 2100000, guid: a3271fc36c932594684350cef7c4fd80, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

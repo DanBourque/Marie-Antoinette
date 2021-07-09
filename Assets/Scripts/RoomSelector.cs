@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public enum Room{ ChainLocker, EngineRoom, Galley, GuestCabin, Quarters, Sailroom, Salon }
 
 public class RoomSelector: MonoBehaviour{
-	private const float SmoothTime = 3, deckExpandedY = 1.73f, hullExpandedY = -2.91f, expandedScale = 1.5f;
+	private const float SmoothTime = 3, deckExpandedY = 2f, hullExpandedY = -3.1f, expandedScale = 1.5f;
 	public Transform hull, deck, spotlight;
 	public GameObject[] rooms;
 	public RectTransform[] photoStrips;
@@ -43,15 +43,18 @@ public class RoomSelector: MonoBehaviour{
 			for( var r=0; r<rooms.Length; r++ ){
 				roomPosTargets[ r ] = roomAnchors[ r ] + new Vector3( 0, hullExpandedY, 0 );
 				roomScaleTargets[ r ] = Vector3.one;
+				SetExtended( rooms[ r ].transform, false );
 			}
 			roomPosTargets[ ( int )room ] = spotlight.position;
 			roomScaleTargets[ ( int )room ] = new Vector3( expandedScale, expandedScale, expandedScale );
 			deckPosTarget = new Vector3( 0, deckExpandedY, 0 );
 			hullPosTarget = new Vector3( 0, hullExpandedY, 0 );
+			SetExtended( rooms[ ( int )room ].transform, true );
 		}else{
 			for( var r=0; r<rooms.Length; r++ ){
 				roomPosTargets[ r ] = roomAnchors[ r ];
 				roomScaleTargets[ r ] = Vector3.one;
+				SetExtended( rooms[ r ].transform, false );
 			}
 			deckPosTarget = hullPosTarget = Vector3.zero;
 		}
@@ -60,6 +63,14 @@ public class RoomSelector: MonoBehaviour{
 			photoStrips[ r ].gameObject.SetActive( isOn ? r==( int )room : false );
 		defaultPhotoStrip.gameObject.SetActive( !isOn );
 		photosScrollRect.content = isOn ? photoStrips[ ( int )room ] : defaultPhotoStrip;
+	}
+
+	private void SetExtended( Transform room, bool extended ){
+		foreach( Transform child in room ){
+			var roomExtender = child.GetComponent< RoomExtender >();
+			if( roomExtender!=null )
+				roomExtender.Extended = extended;
+		}
 	}
 
 	public void OnRoomsSlideout(){
