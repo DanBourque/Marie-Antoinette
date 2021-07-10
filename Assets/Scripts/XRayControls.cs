@@ -37,12 +37,9 @@ public class XRayControls: MonoBehaviour{
 			PrepPatient( child );
 
 		var renderer = patient.GetComponent< Renderer >();
-		if( renderer!=null ){
-			foreach( var material in renderer.materials ){
+		if( renderer!=null )
+			foreach( var material in renderer.materials )
 				materials.Add( material );
-				material.shader = xrayShader;
-			}
-		}
 	}
 
 	private void OnValueChanged( Axis axis, float value ){

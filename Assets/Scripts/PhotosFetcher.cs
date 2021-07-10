@@ -10,9 +10,14 @@ public class PhotosFetcher: MonoBehaviour{
 	private const string GitHubFolderPreamble = "https://api.github.com/repos/DanBourque/Marie-Antoinette/contents/docs/Photos/";
 	private const string FilenameLinePreamble = "    \"name\": ";
 	public GameObject photoPrefab;
+	private static PhotoLocator photoLocator;
 	private float PhotoWidth;
 
-	void Start() => StartCoroutine( GetPhotoList( GetComponent< ToggleGroup >() ) );
+	void Start(){
+		if( !photoLocator )
+			photoLocator = FindObjectOfType< PhotoLocator >();
+		StartCoroutine( GetPhotoList( GetComponent< ToggleGroup >() ) );
+	}
 
 	IEnumerator GetPhotoList( ToggleGroup toggleGroup ){
 		PhotoWidth = ( photoPrefab.transform as RectTransform ).rect.width;
@@ -32,7 +37,7 @@ public class PhotosFetcher: MonoBehaviour{
 						toggle.group = toggleGroup;
 						if( filename.Contains( "@" ) ){
 							var coords = filename.Substring( 0, filename.Length-6 ).Substring( filename.IndexOf( "(" )+1 ).Split( new []{ ',' } );
-							var photoLocator = photo.AddComponent< PhotoLocator >();
+							photoLocator.RectTransform = photo.transform as RectTransform;
 							photoLocator.GPosition = new Vector3( float.Parse( coords[ 0 ] ), float.Parse( coords[ 1 ] ), float.Parse( coords[ 2 ] ) );
 							toggle.onValueChanged.AddListener( isOn => photoLocator.IsOn = isOn );
 						}else

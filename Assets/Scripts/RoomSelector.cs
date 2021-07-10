@@ -55,6 +55,8 @@ public class RoomSelector: MonoBehaviour{
 			deckPosTarget = new Vector3( 0, deckExpandedY, 0 );
 			hullPosTarget = new Vector3( 0, hullExpandedY, 0 );
 			SetExtended( rooms[ ( int )room ].transform, true );
+			if( isXRaySlideoutVisible )
+				OnXRaySlideout();		// Close the X-Ray panel when we expand a room.
 		}else{
 			for( var r=0; r<rooms.Length; r++ ){
 				roomPosTargets[ r ] = roomAnchors[ r ];
