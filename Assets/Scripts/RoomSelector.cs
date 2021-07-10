@@ -15,8 +15,9 @@ public class RoomSelector: MonoBehaviour{
 	private Vector3[] roomPosTargets;
 	private Vector3[] roomScaleTargets;
 	private Vector3 hullPosTarget, deckPosTarget;
-	public RectTransform roomsSlideoutPanel, photosSlideoutPanel;
-	private bool isRoomsSlideoutVisible = true, isPhotosSlideoutVisible = true;
+	private XRayControls xrayControls;
+	public RectTransform roomsSlideoutPanel, photosSlideoutPanel, xraySlideoutPanel;
+	private bool isRoomsSlideoutVisible = true, isPhotosSlideoutVisible = true, isXRaySlideoutVisible = true;
 
 	private void Awake(){
 		roomAnchors = new Vector3[ rooms.Length ];
@@ -28,8 +29,10 @@ public class RoomSelector: MonoBehaviour{
 		}
 		defaultPhotoStrip = photosScrollRect.content;
 		photosSlideoutViewport = photosSlideoutPanel.Find( "Viewport" ).gameObject;
+		xrayControls = FindObjectOfType< XRayControls >( true );
 		OnRoomsSlideout();
 		OnPhotosSlideout();
+		OnXRaySlideout();
 	}
 
 	public void OnChainLocker( bool isOn ) => SelectRoom( Room.ChainLocker, isOn );
@@ -84,6 +87,12 @@ public class RoomSelector: MonoBehaviour{
 		isPhotosSlideoutVisible = !isPhotosSlideoutVisible;
 		photosSlideoutPanel.anchoredPosition = new Vector2( isPhotosSlideoutVisible ? 0 : photosSlideoutPanel.rect.width, 0 );
 		photosSlideoutViewport.SetActive( isPhotosSlideoutVisible );
+	}
+
+	public void OnXRaySlideout(){
+		isXRaySlideoutVisible = !isXRaySlideoutVisible;
+		xraySlideoutPanel.anchoredPosition = new Vector2( xraySlideoutPanel.anchoredPosition.x, isXRaySlideoutVisible ? 0 : -xraySlideoutPanel.rect.height );
+		xrayControls.ApplyXRayShader( isXRaySlideoutVisible );
 	}
 
 	private void Update(){
