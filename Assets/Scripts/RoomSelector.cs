@@ -10,6 +10,7 @@ public class RoomSelector: MonoBehaviour{
 	public RectTransform[] photoStrips;
 	private RectTransform defaultPhotoStrip;
 	public ScrollRect photosScrollRect;
+	private GameObject photosSlideoutViewport;
 	private Vector3[] roomAnchors;
 	private Vector3[] roomPosTargets;
 	private Vector3[] roomScaleTargets;
@@ -26,6 +27,7 @@ public class RoomSelector: MonoBehaviour{
 			roomScaleTargets[ r ] = Vector3.one;
 		}
 		defaultPhotoStrip = photosScrollRect.content;
+		photosSlideoutViewport = photosSlideoutPanel.Find( "Viewport" ).gameObject;
 		OnRoomsSlideout();
 		OnPhotosSlideout();
 	}
@@ -81,6 +83,7 @@ public class RoomSelector: MonoBehaviour{
 	public void OnPhotosSlideout(){
 		isPhotosSlideoutVisible = !isPhotosSlideoutVisible;
 		photosSlideoutPanel.anchoredPosition = new Vector2( isPhotosSlideoutVisible ? 0 : photosSlideoutPanel.rect.width, 0 );
+		photosSlideoutViewport.SetActive( isPhotosSlideoutVisible );
 	}
 
 	private void Update(){
