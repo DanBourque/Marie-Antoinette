@@ -53,8 +53,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding:
     m_Left: 0
-    m_Right: 0
-    m_Top: 8
+    m_Right: 13
+    m_Top: 11
     m_Bottom: 0
   m_ChildAlignment: 1
   m_Spacing: 8
@@ -105,8 +105,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   photoPrefab: {fileID: 2494735039075924425, guid: 5181a9fe38d21ba48951f961baa50a70, type: 3}
-  roomName: Outside
-  photoAddrs:
-  - Outside/02.jpg
-  - Outside/06.jpg
-  - Outside/12.jpg

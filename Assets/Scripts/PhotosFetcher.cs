@@ -52,7 +52,7 @@ public class PhotosFetcher: MonoBehaviour{
 		yield return webRequest.SendWebRequest();
 		if( webRequest.result==Result.Success ){
 			Texture2D tex = texDownloadHandler.texture;
-			var img = photo.GetComponent< Image >();
+			var img = photo.transform.Find( "Mask/Image" ).GetComponent< Image >();
 			img.type = Image.Type.Simple;
 			img.sprite = Sprite.Create( tex, new Rect( 0, 0, tex.width, tex.height ), Vector2.zero, 1f );
 			( photo.transform as RectTransform ).SetSizeWithCurrentAnchors( RectTransform.Axis.Vertical, tex.height*PhotoWidth/tex.width );
