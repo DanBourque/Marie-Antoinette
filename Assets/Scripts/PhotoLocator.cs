@@ -3,39 +3,31 @@ using UnityEngine;
 public class PhotoLocator: MonoBehaviour{
 	private Vector3[] worldCorners = new Vector3[ 4 ];
 	private Mesh mesh;
-	private MeshRenderer meshRenderer;
-	public Vector3 GPosition{ set; get; }
-	private bool isOn = false;
-	public bool IsOn{
-		set{
-			isOn = value;
-			meshRenderer.enabled = isOn;
-		}
-		get => isOn;
-	}
+	private Transform indicator;
 	public RectTransform RectTransform{ set; get; }
 
-	private void Start(){
+	private void Awake(){
 		GetComponent< MeshFilter >().mesh = mesh = BuildMesh();
-		meshRenderer = GetComponent< MeshRenderer >();
+		GetComponent< MeshRenderer >().material.renderQueue = 2999;		// Transparent is 3000, but we set ours to 2999 to allow UI elements to occlude it.
+		indicator = transform.Find( "Indicator" );
 	}
 
+	public void SetPosition( Vector3 position ) => indicator.position = position;
+
 	private void Update(){
-		if( IsOn ){
-			RectTransform.GetWorldCorners( worldCorners );
-			Vector3[] vertices = mesh.vertices;
+		Vector3[] vertices = mesh.vertices;
 
-			vertices[ 0 ] = worldCorners[ 0 ];
-			vertices[ 1 ] = worldCorners[ 3 ];
-			vertices[ 2 ] = worldCorners[ 2 ];
-			vertices[ 3 ] = worldCorners[ 1 ];
-			vertices[ 4 ] =
-			vertices[ 5 ] =
-			vertices[ 6 ] =
-			vertices[ 7 ] = GPosition;
+		RectTransform.GetWorldCorners( worldCorners );
+		vertices[ 0 ] = worldCorners[ 0 ];
+		vertices[ 1 ] = worldCorners[ 3 ];
+		vertices[ 2 ] = worldCorners[ 2 ];
+		vertices[ 3 ] = worldCorners[ 1 ];
+		vertices[ 4 ] =
+		vertices[ 5 ] =
+		vertices[ 6 ] =
+		vertices[ 7 ] = indicator.position;
 
-			mesh.vertices = vertices;
-		}
+		mesh.vertices = vertices;
 	}
 
 	private static Mesh BuildMesh(){
@@ -60,7 +52,7 @@ public class PhotoLocator: MonoBehaviour{
 		};
 		
 		Mesh mesh = new Mesh();
-		mesh.name = "Dynamic Mesh";
+		mesh.name = "Photo Locator Dynamic Mesh";
 		mesh.vertices = vertices;
 		mesh.triangles = triangles;
 		mesh.RecalculateNormals();

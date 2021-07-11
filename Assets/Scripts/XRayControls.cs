@@ -6,15 +6,18 @@ using UnityEngine.UI;
 public enum Axis{ X, Y, Z }
 
 public class XRayControls: MonoBehaviour{
+	private const string PlanePosition = "_PlanePosition", PlaneNormal = "_PlaneNormal";
 	private const float ScanCoverage = 1.8f;
 	private Dictionary< Axis, Slider > sliders = new Dictionary< Axis, Slider >();
 	private Dictionary< Axis, float > extents = new Dictionary< Axis, float >{ { Axis.X, 2.25f }, { Axis.Y, 2.17f }, { Axis.Z, 6.7f } };
-	public Shader litShader, xrayShader;
+	private Shader defaultShader;
+	public Shader xrayShader;
 	private HashSet< Material > materials = new HashSet< Material >();
 	public Transform patient, plane;
+	private bool materialsInitialized = false;
 
 	private void Awake(){
-		litShader = Shader.Find( "Universal Render Pipeline/Lit" );
+		defaultShader = Shader.Find( "Universal Render Pipeline/Lit" );
 		sliders[ Axis.X ] = transform.Find( "X Axis" ).GetComponent< Slider >();
 		sliders[ Axis.Y ] = transform.Find( "Y Axis" ).GetComponent< Slider >();
 		sliders[ Axis.Z ] = transform.Find( "Z Axis" ).GetComponent< Slider >();
@@ -22,11 +25,6 @@ public class XRayControls: MonoBehaviour{
 			sliders[ axis ].onValueChanged.AddListener( v => OnValueChanged( axis, v ) );
 
 		PrepPatient( patient );
-
-		foreach( var material in materials ){
-			material.SetVector( "_PlanePosition", Vector3.zero );
-			material.SetVector( "_PlaneNormal", Vector3.down );
-		}
 	}
 
 	private void PrepPatient( Transform patient ){
@@ -64,14 +62,22 @@ public class XRayControls: MonoBehaviour{
 		}
 
 		foreach( var material in materials ){
-			material.SetVector( "_PlanePosition", plane.position );
-			material.SetVector( "_PlaneNormal", plane.forward );
+			material.SetVector( PlanePosition, plane.position );
+			material.SetVector( PlaneNormal, plane.forward );
 		}
 	}
 
 	public void ApplyXRayShader( bool apply ){
-		var shader = apply ? xrayShader : litShader;
+		var shader = apply ? xrayShader : defaultShader;
 		foreach( var material in materials )
 			material.shader = shader;
+
+		if( !materialsInitialized && apply ){
+			foreach( var material in materials ){
+				material.SetVector( PlanePosition, Vector3.down*10 );
+				material.SetVector( PlaneNormal, Vector3.down );
+			}
+			materialsInitialized = true;
+		}
 	}
 }

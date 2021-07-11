@@ -3,11 +3,14 @@ using UnityEngine.EventSystems;
 
 public class RotationControls: MonoBehaviour{
 	public float dragSpeed = .1f, orbitSpeed = 0.025f;
+	private bool isRotating = true;
 	public Transform spotlight;
 	private Camera cam;
 	private Vector3 prevMousePos = Vector3.zero, mousePosDelta = Vector3.zero;
 
 	private void Awake() => cam = Camera.main;
+
+	public void SetRotating( bool value ) => isRotating = value;
 
 	private void Update(){
 		if( Input.GetMouseButton( 0 ) && !EventSystem.current.IsPointerOverGameObject() ){
@@ -17,7 +20,7 @@ public class RotationControls: MonoBehaviour{
 			else
 				cam.transform.RotateAround( spotlight.position, Vector3.up, Vector3.Dot( mousePosDelta, Vector3.left ) );
 			cam.transform.RotateAround( spotlight.position, cam.transform.right, Vector3.Dot( mousePosDelta, Vector3.down ) );
-		}else
+		}else if( isRotating )
 			cam.transform.RotateAround( spotlight.position, Vector3.up, orbitSpeed );
 		prevMousePos = Input.mousePosition;
 	}

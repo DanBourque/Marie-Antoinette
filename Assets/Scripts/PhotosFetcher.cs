@@ -15,7 +15,7 @@ public class PhotosFetcher: MonoBehaviour{
 
 	void Start(){
 		if( !photoLocator )
-			photoLocator = FindObjectOfType< PhotoLocator >();
+			photoLocator = FindObjectOfType< PhotoLocator >( true );
 		StartCoroutine( GetPhotoList( GetComponent< ToggleGroup >() ) );
 	}
 
@@ -37,9 +37,12 @@ public class PhotosFetcher: MonoBehaviour{
 						toggle.group = toggleGroup;
 						if( filename.Contains( "@" ) ){
 							var coords = filename.Substring( 0, filename.Length-6 ).Substring( filename.IndexOf( "(" )+1 ).Split( new []{ ',' } );
-							photoLocator.RectTransform = photo.transform as RectTransform;
-							photoLocator.GPosition = new Vector3( float.Parse( coords[ 0 ] ), float.Parse( coords[ 1 ] ), float.Parse( coords[ 2 ] ) );
-							toggle.onValueChanged.AddListener( isOn => photoLocator.IsOn = isOn );
+							var photoPosition = new Vector3( float.Parse( coords[ 0 ] ), float.Parse( coords[ 1 ] ), float.Parse( coords[ 2 ] ) );
+							toggle.onValueChanged.AddListener( isOn => {
+								photoLocator.gameObject.SetActive( isOn );
+								photoLocator.RectTransform = photo.transform as RectTransform;
+								photoLocator.SetPosition( photoPosition );
+							} );
 						}else
 							toggle.onValueChanged.AddListener( isOn => toggle.isOn = false );		// Since the filename didn't contain coords, we have nothing to display.
 						StartCoroutine( LoadFromWeb( photo, GitHubPhotoPreamble+name+"/"+filename ) );
