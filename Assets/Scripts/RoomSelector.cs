@@ -11,7 +11,6 @@ public class RoomSelector: MonoBehaviour{
 	private RectTransform defaultPhotoStrip;
 	public ScrollRect photosScrollRect;
 	private GameObject photosSlideoutViewport;
-	private GameObject photoLocator;
 	private Vector3[] roomAnchors;
 	private Vector3[] roomPosTargets;
 	private Vector3[] roomScaleTargets;
@@ -30,7 +29,6 @@ public class RoomSelector: MonoBehaviour{
 		}
 		defaultPhotoStrip = photosScrollRect.content;
 		photosSlideoutViewport = photosSlideoutPanel.Find( "Viewport" ).gameObject;
-		photoLocator = FindObjectOfType< PhotoLocator >( true ).gameObject;
 		xrayControls = FindObjectOfType< XRayControls >( true );
 		OnRoomsSlideout();
 		OnPhotosSlideout();
@@ -91,8 +89,6 @@ public class RoomSelector: MonoBehaviour{
 		isPhotosSlideoutVisible = !isPhotosSlideoutVisible;
 		photosSlideoutPanel.anchoredPosition = new Vector2( isPhotosSlideoutVisible ? 0 : photosSlideoutPanel.rect.width, 0 );
 		photosSlideoutViewport.SetActive( isPhotosSlideoutVisible );
-		if( !isPhotosSlideoutVisible )
-			photoLocator.SetActive( false );
 	}
 
 	public void OnXRaySlideout(){

@@ -105,4 +105,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   photoPrefab: {fileID: 2494735039075924425, guid: 5181a9fe38d21ba48951f961baa50a70, type: 3}
-  photoLocatorPrefab: {fileID: 3023063406694962171, guid: ad8d966969fe8df42ae6d2b722f453f6, type: 3}
+  photoLocatorPrefab: {fileID: 7768473279767018966, guid: dc087646d5eca52479bfa10a24430c38, type: 3}

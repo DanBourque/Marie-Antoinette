@@ -3,21 +3,31 @@ using UnityEngine;
 public class PhotoLocator: MonoBehaviour{
 	private Vector3[] worldCorners = new Vector3[ 4 ];
 	private Mesh mesh;
-	private Transform indicator;
-	public RectTransform RectTransform{ set; get; }
+	private Vector3 position;
+	public Transform indicator;
+	private RectTransform rectTransform;
 
 	private void Awake(){
+		rectTransform = transform.parent as RectTransform;
 		GetComponent< MeshFilter >().mesh = mesh = BuildMesh();
 		GetComponent< MeshRenderer >().material.renderQueue = 2999;		// Transparent is 3000, but we set ours to 2999 to allow UI elements to occlude it.
-		indicator = transform.Find( "Indicator" );
+		var rootScale = transform.root.localScale;
+		transform.localScale = new Vector3( 1/rootScale.x, 1/rootScale.y, 1/rootScale.z );
 	}
 
-	public void SetPosition( Vector3 position ) => indicator.position = position;
+	public void SetPosition( Vector3 position ){
+		transform.rotation = Quaternion.identity;
+		transform.position = Vector3.zero;
+		this.position = position;
+	}
 
 	private void Update(){
+		transform.rotation = Quaternion.identity;
+		transform.position = Vector3.zero;
+		indicator.position = position;
 		Vector3[] vertices = mesh.vertices;
 
-		RectTransform.GetWorldCorners( worldCorners );
+		rectTransform.GetWorldCorners( worldCorners );
 		vertices[ 0 ] = worldCorners[ 0 ];
 		vertices[ 1 ] = worldCorners[ 3 ];
 		vertices[ 2 ] = worldCorners[ 2 ];

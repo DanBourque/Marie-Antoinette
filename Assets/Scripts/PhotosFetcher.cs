@@ -10,14 +10,10 @@ public class PhotosFetcher: MonoBehaviour{
 	private const string GitHubFolderPreamble = "https://api.github.com/repos/DanBourque/Marie-Antoinette/contents/docs/Photos/";
 	private const string FilenameLinePreamble = "    \"name\": ";
 	public GameObject photoPrefab;
-	private static PhotoLocator photoLocator;
+	public PhotoLocator photoLocatorPrefab;
 	private float PhotoWidth;
 
-	void Start(){
-		if( !photoLocator )
-			photoLocator = FindObjectOfType< PhotoLocator >( true );
-		StartCoroutine( GetPhotoList( GetComponent< ToggleGroup >() ) );
-	}
+	void Start() => StartCoroutine( GetPhotoList( GetComponent< ToggleGroup >() ) );
 
 	IEnumerator GetPhotoList( ToggleGroup toggleGroup ){
 		PhotoWidth = ( photoPrefab.transform as RectTransform ).rect.width;
@@ -36,13 +32,10 @@ public class PhotosFetcher: MonoBehaviour{
 						photo.name = filename;
 						toggle.group = toggleGroup;
 						if( filename.Contains( "@" ) ){
+							var photoLocator = Instantiate( photoLocatorPrefab, photo.transform );
 							var coords = filename.Substring( 0, filename.Length-6 ).Substring( filename.IndexOf( "(" )+1 ).Split( new []{ ',' } );
-							var photoPosition = new Vector3( float.Parse( coords[ 0 ] ), float.Parse( coords[ 1 ] ), float.Parse( coords[ 2 ] ) );
-							toggle.onValueChanged.AddListener( isOn => {
-								photoLocator.gameObject.SetActive( isOn );
-								photoLocator.RectTransform = photo.transform as RectTransform;
-								photoLocator.SetPosition( photoPosition );
-							} );
+							photoLocator.SetPosition( new Vector3( float.Parse( coords[ 0 ] ), float.Parse( coords[ 1 ] ), float.Parse( coords[ 2 ] ) ) );
+							toggle.onValueChanged.AddListener( isOn => photoLocator.gameObject.SetActive( isOn ) );
 						}else
 							toggle.onValueChanged.AddListener( isOn => toggle.isOn = false );		// Since the filename didn't contain coords, we have nothing to display.
 						StartCoroutine( LoadFromWeb( photo, GitHubPhotoPreamble+name+"/"+filename ) );
