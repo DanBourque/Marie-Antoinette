@@ -14,9 +14,10 @@ public class RotationControls: MonoBehaviour{
 	public void SetRotating( bool value ) => isRotating = value;
 
 	private void Update(){
-		if( Input.GetMouseButtonDown( 0 ) && !EventSystem.current.IsPointerOverGameObject() )
+		if( Input.GetMouseButtonDown( 0 ) && !EventSystem.current.IsPointerOverGameObject() ){
 			isDragging = true;
-		else if( Input.GetMouseButtonUp( 0 ) )
+			prevMousePos = Input.mousePosition;
+		}else if( !Input.GetMouseButton( 0 ) )
 			isDragging = false;
 
 		if( isDragging ){
@@ -26,8 +27,8 @@ public class RotationControls: MonoBehaviour{
 			else
 				cam.transform.RotateAround( spotlight.position, Vector3.up, Vector3.Dot( mousePosDelta, Vector3.left ) );
 			cam.transform.RotateAround( spotlight.position, cam.transform.right, Vector3.Dot( mousePosDelta, Vector3.down ) );
+			prevMousePos = Input.mousePosition;
 		}else if( isRotating )
 			cam.transform.RotateAround( spotlight.position, Vector3.up, orbitSpeed );
-		prevMousePos = Input.mousePosition;
 	}
 }
