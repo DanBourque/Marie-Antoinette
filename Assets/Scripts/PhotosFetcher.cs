@@ -33,7 +33,7 @@ public class PhotosFetcher: MonoBehaviour{
 						toggle.group = toggleGroup;
 						if( filename.Contains( "@" ) ){
 							var photoLocator = Instantiate( photoLocatorPrefab, photo.transform );
-							var coords = filename.Substring( 0, filename.Length-6 ).Substring( filename.IndexOf( "(" )+1 ).Split( new []{ ',' } );
+							var coords = filename.Substring( 0, filename.Length-5 ).Substring( filename.IndexOf( "@" )+1 ).Split( new []{ ',' } );
 							photoLocator.SetPosition( new Vector3( float.Parse( coords[ 0 ] ), float.Parse( coords[ 1 ] ), float.Parse( coords[ 2 ] ) ) );
 							toggle.onValueChanged.AddListener( isOn => photoLocator.IsOn = isOn );
 						}else
