@@ -35,7 +35,7 @@ public class PhotosFetcher: MonoBehaviour{
 							var photoLocator = Instantiate( photoLocatorPrefab, photo.transform );
 							var coords = filename.Substring( 0, filename.Length-6 ).Substring( filename.IndexOf( "(" )+1 ).Split( new []{ ',' } );
 							photoLocator.SetPosition( new Vector3( float.Parse( coords[ 0 ] ), float.Parse( coords[ 1 ] ), float.Parse( coords[ 2 ] ) ) );
-							toggle.onValueChanged.AddListener( isOn => photoLocator.gameObject.SetActive( isOn ) );
+							toggle.onValueChanged.AddListener( isOn => photoLocator.IsOn = isOn );
 						}else
 							toggle.onValueChanged.AddListener( isOn => toggle.isOn = false );		// Since the filename didn't contain coords, we have nothing to display.
 						StartCoroutine( LoadFromWeb( photo, GitHubPhotoPreamble+name+"/"+filename ) );

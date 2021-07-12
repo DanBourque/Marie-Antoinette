@@ -7,9 +7,9 @@ public enum Axis{ X, Y, Z }
 
 public class XRayControls: MonoBehaviour{
 	private const string PlanePosition = "_PlanePosition", PlaneNormal = "_PlaneNormal";
-	private const float ScanCoverage = 1.8f;
+	private const float ScanCoverage = 2f;	// x2 is 100% coverage. 
 	private Dictionary< Axis, Slider > sliders = new Dictionary< Axis, Slider >();
-	private Dictionary< Axis, float > extents = new Dictionary< Axis, float >{ { Axis.X, 2.25f }, { Axis.Y, 2.17f }, { Axis.Z, 6.7f } };
+	private Dictionary< Axis, float > extents = new Dictionary< Axis, float >{ { Axis.X, 2.25f }, { Axis.Y, 2.17f }, { Axis.Z, 6.85f } };
 	private Shader defaultShader;
 	public Shader xrayShader;
 	private HashSet< Material > materials = new HashSet< Material >();
@@ -48,16 +48,19 @@ public class XRayControls: MonoBehaviour{
 		var sign = Math.Sign( value );
 		switch( axis ){
 			case Axis.X:
-				plane.localRotation = Quaternion.LookRotation( value>=0 ? Vector3.back : Vector3.forward, Vector3.up );
 				plane.localPosition = new Vector3( 0, 0, -sign*extents[ axis ]+ScanCoverage*extents[ axis ]*value );
+				plane.localRotation = Quaternion.LookRotation( value>=0 ? Vector3.back : Vector3.forward, Vector3.up );
+				plane.localScale = new Vector3( extents[ Axis.Z ]*2, extents[ Axis.Y ]*2, 1 );
 			break;
 			case Axis.Y:
-				plane.localRotation = Quaternion.LookRotation( value>=0 ? Vector3.up : Vector3.down, Vector3.forward );
 				plane.localPosition = new Vector3( 0, sign*extents[ axis ]-ScanCoverage*extents[ axis ]*value, 0 );
+				plane.localRotation = Quaternion.LookRotation( value>=0 ? Vector3.up : Vector3.down, Vector3.forward );
+				plane.localScale = new Vector3( extents[ Axis.Z ]*2, extents[ Axis.X ]*2, 1 );
 			break;
 			case Axis.Z:
-				plane.localRotation = Quaternion.LookRotation( value>=0 ? Vector3.right : Vector3.left, Vector3.up );
 				plane.localPosition = new Vector3( sign*extents[ axis ]-ScanCoverage*extents[ axis ]*value, 0, 0 );
+				plane.localRotation = Quaternion.LookRotation( value>=0 ? Vector3.right : Vector3.left, Vector3.up );
+				plane.localScale = new Vector3( extents[ Axis.X ]*2, extents[ Axis.Y ]*2, 1 );
 			break;
 		}
 
@@ -79,5 +82,7 @@ public class XRayControls: MonoBehaviour{
 			}
 			materialsInitialized = true;
 		}
+
+		plane.gameObject.SetActive( apply );
 	}
 }
