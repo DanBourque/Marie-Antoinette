@@ -23,7 +23,6 @@ public class PhotoLocator: MonoBehaviour{
 	}
 	private Vector3 position;
 	public Transform indicator;
-	private RectTransform rectTransform;
 	private bool isOn = false;
 	public bool IsOn{
 		set{
@@ -34,6 +33,7 @@ public class PhotoLocator: MonoBehaviour{
 			Canvas.ForceUpdateCanvases();
 			var scrollRect = ViewportScrollRect;
 			var scrollPosition = scrollRect.content.anchoredPosition;
+			var rectTransform = transform.parent as RectTransform;
 			float elementTop = rectTransform.anchoredPosition.y, elementBottom = elementTop-rectTransform.rect.height;
 			float visibleContentTop = -scrollPosition.y-AutoScrollPadding, visibleContentBottom = -scrollPosition.y-scrollRect.viewport.rect.height+AutoScrollPadding;
 			scrollPosition.y += elementTop > visibleContentTop ? visibleContentTop-elementTop : ( elementBottom < visibleContentBottom ? visibleContentBottom-elementBottom : 0f );
@@ -43,7 +43,6 @@ public class PhotoLocator: MonoBehaviour{
 	}
 
 	private void Awake(){
-		rectTransform = transform.parent as RectTransform;
 		GetComponent< MeshFilter >().mesh = mesh = BuildMesh();
 		MeshRenderer.material.renderQueue = 2999;		// Transparent is 3000, but we set ours to 2999 to allow UI elements to occlude it.
 		var rootScale = transform.root.localScale;
@@ -66,7 +65,7 @@ public class PhotoLocator: MonoBehaviour{
 
 		Vector3[] vertices = mesh.vertices;
 
-		rectTransform.GetWorldCorners( worldCorners );
+		( transform.parent as RectTransform ).GetWorldCorners( worldCorners );
 		vertices[ 0 ] = worldCorners[ 0 ];
 		vertices[ 1 ] = worldCorners[ 3 ];
 		vertices[ 2 ] = worldCorners[ 2 ];

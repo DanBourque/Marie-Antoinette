@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class RotationControls: MonoBehaviour{
-	public float dragSpeed = .1f, orbitSpeed = 0.025f;
+	public float dragSpeed = .25f, orbitSpeed = 0.025f;
 	private bool isRotating = true;
 	public Transform spotlight;
 	private Camera cam;
