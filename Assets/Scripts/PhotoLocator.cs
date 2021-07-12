@@ -46,12 +46,6 @@ public class PhotoLocator: MonoBehaviour{
 		rectTransform = transform.parent as RectTransform;
 		GetComponent< MeshFilter >().mesh = mesh = BuildMesh();
 		MeshRenderer.material.renderQueue = 2999;		// Transparent is 3000, but we set ours to 2999 to allow UI elements to occlude it.
-		UpdateScale();
-	}
-
-	public void UpdateScale(){
-		var rootScale = transform.root.localScale;
-		transform.localScale = new Vector3( 1/rootScale.x, 1/rootScale.y, 1/rootScale.z );
 	}
 
 	public void SetPosition( Vector3 position ){
@@ -63,6 +57,8 @@ public class PhotoLocator: MonoBehaviour{
 	private void Update(){
 		transform.rotation = Quaternion.identity;
 		transform.position = Vector3.zero;
+		var rootScale = transform.root.localScale;
+		transform.localScale = new Vector3( 1/rootScale.x, 1/rootScale.y, 1/rootScale.z );
 		indicator.position = position;
 
 		if( !isOn )
