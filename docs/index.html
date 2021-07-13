@@ -59,9 +59,9 @@
         var div = document.createElement('div');
         div.innerHTML = msg;
         warningBanner.appendChild(div);
-        if (type == 'error') div.style = 'background: red; padding: 10px;';
+        if (type == 'error') div.style = 'background: red; padding: 3px;';
         else {
-          if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
+          if (type == 'warning') div.style = 'background: yellow; padding: 3px;';
           setTimeout(function() {
             warningBanner.removeChild(div);
             updateBannerVisibility();
@@ -88,7 +88,7 @@
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         container.className = "unity-mobile";
         config.devicePixelRatio = 1;
-        unityShowBanner('WebGL builds are not supported on mobile devices.');
+        unityShowBanner('Mobile devices are not recommended', 'warning');
       }
       loadingCover.style.display = "";
 
