@@ -102,4 +102,4 @@ body {
   }
 }
 
-#unity-warning { position: absolute; left: 50%; top: 5%; transform: translate(-50%); background: white; padding: 10px; display: none }
+#unity-warning { position: absolute; left: 10%; top: 5%; transform: translate(-10%); background: yellow; padding: 3px; display: none }
