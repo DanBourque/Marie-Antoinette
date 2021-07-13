@@ -13,6 +13,6 @@ public class GenerateFilenameCoordinates: MonoBehaviour{
 			rot.y -= 360;
 		if( rot.z>180 )
 			rot.z -= 360;
-		generatedFilename =  $"{transform.parent.name} @ {pos.x:0.000}, {pos.y:0.000}, {pos.z:0.000}, {rot.x:0.000}, {rot.y:0.000}, {rot.z:0.000}.jpg";
+		generatedFilename =  $"{transform.parent.name} @ {pos.x:0.000}, {pos.y:0.000}, {pos.z:0.000}, {rot.x:0.000}, {rot.y:0.000}, {rot.z:0.000}";
 	}
 }
