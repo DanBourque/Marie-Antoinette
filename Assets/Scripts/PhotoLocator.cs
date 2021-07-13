@@ -22,6 +22,7 @@ public class PhotoLocator: MonoBehaviour{
 		}
 	}
 	private Vector3 position;
+	private Quaternion rotation;
 	public Transform indicator;
 	private RectTransform rectTransform;
 	private bool isOn = false;
@@ -48,10 +49,11 @@ public class PhotoLocator: MonoBehaviour{
 		MeshRenderer.material.renderQueue = 2999;		// Transparent is 3000, but we set ours to 2999 to allow UI elements to occlude it.
 	}
 
-	public void SetPosition( Vector3 position ){
+	public void SetPosRot( Vector3 position, Vector3 rotation ){
 		transform.rotation = Quaternion.identity;
 		transform.position = Vector3.zero;
 		this.position = position;
+		this.rotation = Quaternion.Euler( rotation );
 	}
 
 	private void Update(){
@@ -60,6 +62,7 @@ public class PhotoLocator: MonoBehaviour{
 		var rootScale = transform.root.localScale;
 		transform.localScale = new Vector3( 1/rootScale.x, 1/rootScale.y, 1/rootScale.z );
 		indicator.position = position;
+		indicator.rotation = rotation;
 
 		if( !isOn )
 			return;
