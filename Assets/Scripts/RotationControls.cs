@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class RotationControls: MonoBehaviour{
+	private const float ZoomSpeed = 1f, ZoomMin = 15, ZoomMax = 85;
 	public float dragSpeed = .25f, orbitSpeed = 0.025f;
 	private bool isRotating = true;
 	public Transform spotlight;
@@ -14,7 +15,8 @@ public class RotationControls: MonoBehaviour{
 	public void SetRotating( bool value ) => isRotating = value;
 
 	private void Update(){
-		if( Input.GetMouseButtonDown( 0 ) && !EventSystem.current.IsPointerOverGameObject() ){
+		var eventSystem = EventSystem.current;
+		if( Input.GetMouseButtonDown( 0 ) && !eventSystem.IsPointerOverGameObject() ){
 			isDragging = true;
 			prevMousePos = Input.mousePosition;
 		}else if( !Input.GetMouseButton( 0 ) )
@@ -30,5 +32,9 @@ public class RotationControls: MonoBehaviour{
 			prevMousePos = Input.mousePosition;
 		}else if( isRotating )
 			cam.transform.RotateAround( spotlight.position, Vector3.up, orbitSpeed );
+
+		var scrollwheelDelta = Input.mouseScrollDelta;
+		if( scrollwheelDelta.y!=0 && !eventSystem.IsPointerOverGameObject() )
+			cam.fieldOfView = Mathf.Clamp( cam.fieldOfView-scrollwheelDelta.y*ZoomSpeed, ZoomMin, ZoomMax );
 	}
 }
