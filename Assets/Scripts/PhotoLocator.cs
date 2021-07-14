@@ -3,33 +3,23 @@ using UnityEngine.UI;
 
 public class PhotoLocator: MonoBehaviour{
 	private const float AutoScrollPadding = 10f;
+	public Material fustrumDefault, fustrumHighlight;
 	private Vector3[] worldCorners = new Vector3[ 4 ];
 	private Mesh mesh;
-	private MeshRenderer meshRenderer;
-	private MeshRenderer MeshRenderer{
-		get{
-			if( !meshRenderer )
-				meshRenderer = GetComponent< MeshRenderer >();
-			return meshRenderer;
-		}
-	}
+	private MeshRenderer MeshRenderer{ get => !meshRenderer ? meshRenderer = GetComponent< MeshRenderer >() : meshRenderer; }
+	private MeshRenderer FustrumRenderer{ get => !fustrumRenderer ? fustrumRenderer = fustrum.GetComponent< MeshRenderer >() : fustrumRenderer; }
+	private MeshRenderer meshRenderer, fustrumRenderer;
+	private ScrollRect ViewportScrollRect{ get => !viewportScrollRect ? viewportScrollRect = GetComponentInParent< ScrollRect >() : viewportScrollRect; }
 	private ScrollRect viewportScrollRect;
-	private ScrollRect ViewportScrollRect{
-		get{
-			if( !viewportScrollRect )
-				viewportScrollRect = GetComponentInParent< ScrollRect >();
-			return viewportScrollRect;
-		}
-	}
 	private Vector3 position;
 	private Quaternion rotation;
-	public Transform indicator;
+	public Transform fustrum;
 	private RectTransform rectTransform;
-	private bool isOn = false;
 	public bool IsOn{
 		set{
 			isOn = value;
 			MeshRenderer.enabled = isOn;
+			FustrumRenderer.material = isOn ? fustrumHighlight : fustrumDefault;
 			
 			// Make sure the associated photo is visible in the scrollrect's viewport.
 			Canvas.ForceUpdateCanvases();
@@ -42,6 +32,7 @@ public class PhotoLocator: MonoBehaviour{
 		}
 		get => isOn;
 	}
+	private bool isOn = false;
 
 	private void Awake(){
 		rectTransform = transform.parent as RectTransform;
@@ -61,8 +52,8 @@ public class PhotoLocator: MonoBehaviour{
 		transform.position = Vector3.zero;
 		var rootScale = transform.root.localScale;
 		transform.localScale = new Vector3( 1/rootScale.x, 1/rootScale.y, 1/rootScale.z );
-		indicator.position = position;
-		indicator.rotation = rotation;
+		fustrum.position = position;
+		fustrum.rotation = rotation;
 
 		if( !isOn )
 			return;
@@ -77,7 +68,7 @@ public class PhotoLocator: MonoBehaviour{
 		vertices[ 4 ] =
 		vertices[ 5 ] =
 		vertices[ 6 ] =
-		vertices[ 7 ] = indicator.position;
+		vertices[ 7 ] = fustrum.position;
 
 		mesh.vertices = vertices;
 	}
