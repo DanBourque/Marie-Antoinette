@@ -1,10 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public enum Room{ ChainLocker, EngineRoom, Galley, GuestCabin, Quarters, Sailroom, Salon }
 
 public class RoomSelector: MonoBehaviour{
-	private const float SmoothTime = 3, deckExpandedY = 2f, hullExpandedY = -3.1f, expandedScale = 1.5f;
+	private const float SmoothTime = 3, DeckExpandedY = 2f, HullExpandedY = -3.1f, ExpandedScale = 1.5f, DampingTolerance = 0.01f;
 	public Transform hull, deck, spotlight;
 	public GameObject[] rooms;
 	public RectTransform[] photoStrips;
@@ -46,14 +47,14 @@ public class RoomSelector: MonoBehaviour{
 	private void SelectRoom( Room room, bool isOn ){
 		if( isOn ){
 			for( var r=0; r<rooms.Length; r++ ){
-				roomPosTargets[ r ] = roomAnchors[ r ] + new Vector3( 0, hullExpandedY, 0 );
+				roomPosTargets[ r ] = roomAnchors[ r ] + new Vector3( 0, HullExpandedY, 0 );
 				roomScaleTargets[ r ] = Vector3.one;
 				SetExtended( rooms[ r ].transform, false );
 			}
 			roomPosTargets[ ( int )room ] = spotlight.position;
-			roomScaleTargets[ ( int )room ] = new Vector3( expandedScale, expandedScale, expandedScale );
-			deckPosTarget = new Vector3( 0, deckExpandedY, 0 );
-			hullPosTarget = new Vector3( 0, hullExpandedY, 0 );
+			roomScaleTargets[ ( int )room ] = new Vector3( ExpandedScale, ExpandedScale, ExpandedScale );
+			deckPosTarget = new Vector3( 0, DeckExpandedY, 0 );
+			hullPosTarget = new Vector3( 0, HullExpandedY, 0 );
 			SetExtended( rooms[ ( int )room ].transform, true );
 			if( isXRaySlideoutVisible )
 				OnXRaySlideout();		// Close the X-Ray panel when we expand a room.
@@ -101,8 +102,13 @@ public class RoomSelector: MonoBehaviour{
 		var time = SmoothTime*Time.deltaTime;
 
 		for( var r=0; r<rooms.Length; r++ ){
-			rooms[ r ].transform.position = Vector3.Lerp( rooms[ r ].transform.position, roomPosTargets[ r ], time );
-			rooms[ r ].transform.localScale	= Vector3.Lerp( rooms[ r ].transform.localScale, roomScaleTargets[ r ], time );
+			if( Vector3.Distance( rooms[ r ].transform.position, roomPosTargets[ r ] )>DampingTolerance ){
+				rooms[ r ].transform.position = Vector3.Lerp( rooms[ r ].transform.position, roomPosTargets[ r ], time );
+				rooms[ r ].transform.localScale	= Vector3.Lerp( rooms[ r ].transform.localScale, roomScaleTargets[ r ], time );
+			}else{
+				rooms[ r ].transform.position = roomPosTargets[ r ];
+				rooms[ r ].transform.localScale	= roomScaleTargets[ r ];
+			}
 		}
 
 		deck.transform.localPosition = Vector3.Lerp( deck.transform.localPosition, deckPosTarget, time );

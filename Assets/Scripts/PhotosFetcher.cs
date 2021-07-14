@@ -31,8 +31,9 @@ public class PhotosFetcher: MonoBehaviour{
 						var toggle = photo.GetComponent< Toggle >();
 						photo.name = filename;
 						toggle.group = toggleGroup;
+						PhotoLocator photoLocator = null;
 						if( filename.Contains( "@" ) ){
-							var photoLocator = Instantiate( photoLocatorPrefab, photo.transform );
+							photoLocator = Instantiate( photoLocatorPrefab, photo.transform );
 							var coords = filename.Substring( 0, filename.Length-5 ).Substring( filename.IndexOf( "@" )+1 ).Split( new []{ ',' } );
 							photoLocator.SetPosRot(
 								new Vector3( float.Parse( coords[ 0 ] ), float.Parse( coords[ 1 ] ), float.Parse( coords[ 2 ] ) ),
@@ -41,7 +42,7 @@ public class PhotosFetcher: MonoBehaviour{
 							toggle.onValueChanged.AddListener( isOn => photoLocator.IsOn = isOn );
 						}else
 							toggle.onValueChanged.AddListener( isOn => toggle.isOn = false );		// Since the filename didn't contain coords, we have nothing to display.
-						StartCoroutine( LoadFromWeb( photo, GitHubPhotoPreamble+name+"/"+filename ) );
+						StartCoroutine( LoadFromWeb( photo, photoLocator, GitHubPhotoPreamble+name+"/"+filename ) );
 					}
 					line = reader.ReadLine();
 				}
@@ -49,7 +50,7 @@ public class PhotosFetcher: MonoBehaviour{
 		}
 	}
 
-	IEnumerator LoadFromWeb( GameObject photo, string url ){
+	IEnumerator LoadFromWeb( GameObject photo, PhotoLocator photoLocator, string url ){
 		var webRequest = new UnityWebRequest( url );
 		var texDownloadHandler = new DownloadHandlerTexture( true );
 		webRequest.downloadHandler = texDownloadHandler;
@@ -60,6 +61,7 @@ public class PhotosFetcher: MonoBehaviour{
 			img.type = Image.Type.Simple;
 			img.sprite = Sprite.Create( tex, new Rect( 0, 0, tex.width, tex.height ), Vector2.zero, 1f );
 			( photo.transform as RectTransform ).SetSizeWithCurrentAnchors( RectTransform.Axis.Vertical, tex.height*PhotoWidth/tex.width );
+			photoLocator?.gameObject.SetActive( true );
 		}
 	}
 }

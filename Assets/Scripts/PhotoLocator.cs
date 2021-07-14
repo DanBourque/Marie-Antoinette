@@ -6,10 +6,10 @@ public class PhotoLocator: MonoBehaviour{
 	public Material fustrumDefault, fustrumHighlight;
 	private Vector3[] worldCorners = new Vector3[ 4 ];
 	private Mesh mesh;
-	private MeshRenderer MeshRenderer{ get => !meshRenderer ? meshRenderer = GetComponent< MeshRenderer >() : meshRenderer; }
-	private MeshRenderer FustrumRenderer{ get => !fustrumRenderer ? fustrumRenderer = fustrum.GetComponent< MeshRenderer >() : fustrumRenderer; }
+	private MeshRenderer MeshRenderer{ get => meshRenderer ? meshRenderer : meshRenderer = GetComponent< MeshRenderer >(); }
+	private MeshRenderer FustrumRenderer{ get => fustrumRenderer ? fustrumRenderer : fustrumRenderer = fustrum.GetComponent< MeshRenderer >(); }
 	private MeshRenderer meshRenderer, fustrumRenderer;
-	private ScrollRect ViewportScrollRect{ get => !viewportScrollRect ? viewportScrollRect = GetComponentInParent< ScrollRect >() : viewportScrollRect; }
+	private ScrollRect ViewportScrollRect{ get => viewportScrollRect ? viewportScrollRect : viewportScrollRect = GetComponentInParent< ScrollRect >(); }
 	private ScrollRect viewportScrollRect;
 	private Vector3 position;
 	private Quaternion rotation;
@@ -20,7 +20,7 @@ public class PhotoLocator: MonoBehaviour{
 			isOn = value;
 			MeshRenderer.enabled = isOn;
 			FustrumRenderer.material = isOn ? fustrumHighlight : fustrumDefault;
-			
+
 			// Make sure the associated photo is visible in the scrollrect's viewport.
 			Canvas.ForceUpdateCanvases();
 			var scrollRect = ViewportScrollRect;
@@ -37,19 +37,21 @@ public class PhotoLocator: MonoBehaviour{
 	private void Awake(){
 		rectTransform = transform.parent as RectTransform;
 		GetComponent< MeshFilter >().mesh = mesh = BuildMesh();
-		MeshRenderer.material.renderQueue = 2999;		// Transparent is 3000, but we set ours to 2999 to allow UI elements to occlude it.
+		MeshRenderer.material.renderQueue = 2999;   // Transparent is 3000, but we set ours to 2999 to allow UI elements to occlude it.
 	}
 
 	public void SetPosRot( Vector3 position, Vector3 rotation ){
-		transform.rotation = Quaternion.identity;
+		this.position = fustrum.position = position;
+		this.rotation = fustrum.rotation = Quaternion.Euler( rotation );
 		transform.position = Vector3.zero;
-		this.position = position;
-		this.rotation = Quaternion.Euler( rotation );
+		transform.rotation = Quaternion.identity;
+		var rootScale = transform.root.localScale;
+		transform.localScale = new Vector3( 1/rootScale.x, 1/rootScale.y, 1/rootScale.z );
 	}
 
 	private void Update(){
-		transform.rotation = Quaternion.identity;
 		transform.position = Vector3.zero;
+		transform.rotation = Quaternion.identity;
 		var rootScale = transform.root.localScale;
 		transform.localScale = new Vector3( 1/rootScale.x, 1/rootScale.y, 1/rootScale.z );
 		fustrum.position = position;
