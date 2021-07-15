@@ -60,6 +60,7 @@ public class PhotosFetcher: MonoBehaviour{
 			var img = photo.transform.Find( "Mask/Image" ).GetComponent< Image >();
 			img.type = Image.Type.Simple;
 			img.sprite = Sprite.Create( tex, new Rect( 0, 0, tex.width, tex.height ), Vector2.zero, 1f );
+			img.color = Color.white;
 			( photo.transform as RectTransform ).SetSizeWithCurrentAnchors( RectTransform.Axis.Vertical, tex.height*PhotoWidth/tex.width );
 			photoLocator?.gameObject.SetActive( true );
 		}
