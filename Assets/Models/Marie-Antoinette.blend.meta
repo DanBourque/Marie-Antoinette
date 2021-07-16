@@ -37,6 +37,16 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Chromium
+    second: {fileID: 2100000, guid: 9d784a789a041634fb88be9ed94ad901, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chromium.001
+    second: {fileID: 2100000, guid: 3374076042f36464d9145abc11e86fbf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Cockpit Material
     second: {fileID: 2100000, guid: 82115386ae022c945ade8db49873e478, type: 2}
   - first:
