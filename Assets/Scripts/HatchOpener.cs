@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HatchOpener: MonoBehaviour{
 	private const float TableTravel = 0.6f;
-	public float speed = 1f;
+	public float speed = 2f;
 	public Transform table;
 	private Vector3 initialTablePos;
 	private float angle = 0;
