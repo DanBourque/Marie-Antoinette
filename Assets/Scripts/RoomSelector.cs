@@ -18,7 +18,7 @@ public class RoomSelector: MonoBehaviour{
 	private XRayControls xrayControls;
 	public RectTransform roomsSlideoutPanel, photosSlideoutPanel, xraySlideoutPanel;
 	private bool isRoomsSlideoutVisible = true, isPhotosSlideoutVisible = true, isXRaySlideoutVisible = true;
-	private float timeElapsed;
+	private float timeElapsed = LerpDuration;
 
 	private void Awake(){
 		roomAnchors = new Vector3[ rooms.Length ];

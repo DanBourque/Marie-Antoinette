@@ -5,7 +5,7 @@ public class RoomExtender: MonoBehaviour{
 	private bool extended = false;
 	private Vector3 initialPos, startPos, targetPos;
 	public float distance = 2;
-	private float timeElapsed;
+	private float timeElapsed = LerpDuration;
 
 	public bool Extended{
 		set{

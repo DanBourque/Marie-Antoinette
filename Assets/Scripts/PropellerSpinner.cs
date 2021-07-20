@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class PropellerSpinner: MonoBehaviour{
-	public float speed = 0.5f;
+	public const float Speed = 100f;
 
-	private void Update() => transform.Rotate( Vector3.up, speed );
+	private void Update() => transform.Rotate( Vector3.up, Time.deltaTime*Speed );
 }
