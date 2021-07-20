@@ -1,31 +1,33 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public enum Room{ ChainLocker, EngineRoom, Galley, GuestCabin, Quarters, Sailroom, Salon }
 
 public class RoomSelector: MonoBehaviour{
-	private const float SmoothTime = 3, DeckExpandedY = 2f, HullExpandedY = -3.1f, ExpandedScale = 1.5f, DampingTolerance = 0.01f;
+	private const float LerpDuration = 2, DeckExpandedY = 2f, HullExpandedY = -3.1f, ExpandedScale = 1.5f;
 	public Transform hull, deck, spotlight;
-	public GameObject[] rooms;
+	public Transform[] rooms;
 	public RectTransform[] photoStrips;
 	private RectTransform defaultPhotoStrip;
 	public ScrollRect photosScrollRect;
 	private GameObject photosSlideoutViewport;
 	private Vector3[] roomAnchors;
-	private Vector3[] roomPosTargets;
-	private Vector3[] roomScaleTargets;
-	private Vector3 hullPosTarget, deckPosTarget;
+	private Vector3[] roomPosStarts, roomPosTargets;
+	private Vector3[] roomScaleStarts, roomScaleTargets;
+	private Vector3 hullPosStart, hullPosTarget, deckPosStart, deckPosTarget;
 	private XRayControls xrayControls;
 	public RectTransform roomsSlideoutPanel, photosSlideoutPanel, xraySlideoutPanel;
 	private bool isRoomsSlideoutVisible = true, isPhotosSlideoutVisible = true, isXRaySlideoutVisible = true;
+	private float timeElapsed;
 
 	private void Awake(){
 		roomAnchors = new Vector3[ rooms.Length ];
+		roomPosStarts = new Vector3[ rooms.Length ];
 		roomPosTargets = new Vector3[ rooms.Length ];
+		roomScaleStarts = new Vector3[ rooms.Length ];
 		roomScaleTargets = new Vector3[ rooms.Length ];
 		for( var r=0; r<roomAnchors.Length; r++ ){		// Record the original anchors for animation purposes.
-			roomAnchors[ r ] = roomPosTargets[ r ] = rooms[ r ].transform.position;
+			roomAnchors[ r ] = roomPosTargets[ r ] = rooms[ r ].position;
 			roomScaleTargets[ r ] = Vector3.one;
 		}
 		defaultPhotoStrip = photosScrollRect.content;
@@ -49,23 +51,31 @@ public class RoomSelector: MonoBehaviour{
 			for( var r=0; r<rooms.Length; r++ ){
 				roomPosTargets[ r ] = roomAnchors[ r ] + new Vector3( 0, HullExpandedY, 0 );
 				roomScaleTargets[ r ] = Vector3.one;
-				SetExtended( rooms[ r ].transform, false );
+				SetExtended( rooms[ r ], false );
 			}
 			roomPosTargets[ ( int )room ] = spotlight.position;
 			roomScaleTargets[ ( int )room ] = new Vector3( ExpandedScale, ExpandedScale, ExpandedScale );
 			deckPosTarget = new Vector3( 0, DeckExpandedY, 0 );
 			hullPosTarget = new Vector3( 0, HullExpandedY, 0 );
-			SetExtended( rooms[ ( int )room ].transform, true );
+			SetExtended( rooms[ ( int )room ], true );
 			if( isXRaySlideoutVisible )
 				OnXRaySlideout();		// Close the X-Ray panel when we expand a room.
 		}else{
 			for( var r=0; r<rooms.Length; r++ ){
 				roomPosTargets[ r ] = roomAnchors[ r ];
 				roomScaleTargets[ r ] = Vector3.one;
-				SetExtended( rooms[ r ].transform, false );
+				SetExtended( rooms[ r ], false );
 			}
 			deckPosTarget = hullPosTarget = Vector3.zero;
 		}
+
+		for( var r=0; r<rooms.Length; r++ ){
+			roomPosStarts[ r ] = rooms[ r ].position;
+			roomScaleStarts[ r ] = rooms[ r ].localScale;
+		}
+		deckPosStart = deck.localPosition;
+		hullPosStart = hull.localPosition;
+		timeElapsed = 0;
 
 		for( var r=0; r<photoStrips.Length; r++ )
 			photoStrips[ r ].gameObject.SetActive( isOn ? r==( int )room : false );
@@ -99,19 +109,25 @@ public class RoomSelector: MonoBehaviour{
 	}
 
 	private void Update(){
-		var time = SmoothTime*Time.deltaTime;
+		if( timeElapsed<LerpDuration ){
+			var time = timeElapsed/LerpDuration;
+			time = time * time * ( 3f-2f*time );
 
-		for( var r=0; r<rooms.Length; r++ ){
-			if( Vector3.Distance( rooms[ r ].transform.position, roomPosTargets[ r ] )>DampingTolerance ){
-				rooms[ r ].transform.position = Vector3.Lerp( rooms[ r ].transform.position, roomPosTargets[ r ], time );
-				rooms[ r ].transform.localScale	= Vector3.Lerp( rooms[ r ].transform.localScale, roomScaleTargets[ r ], time );
-			}else{
-				rooms[ r ].transform.position = roomPosTargets[ r ];
-				rooms[ r ].transform.localScale	= roomScaleTargets[ r ];
+			for( var r=0; r<rooms.Length; r++ ){
+				rooms[ r ].position = Vector3.Lerp( roomPosStarts[ r ], roomPosTargets[ r ], time );
+				rooms[ r ].localScale	= Vector3.Lerp( roomScaleStarts[ r ], roomScaleTargets[ r ], time );
 			}
-		}
+			deck.localPosition = Vector3.Lerp( deckPosStart, deckPosTarget, time );
+			hull.localPosition = Vector3.Lerp( hullPosStart, hullPosTarget, time );
 
-		deck.transform.localPosition = Vector3.Lerp( deck.transform.localPosition, deckPosTarget, time );
-		hull.transform.localPosition = Vector3.Lerp( hull.transform.localPosition, hullPosTarget, time );
+			timeElapsed += Time.deltaTime;
+		}else{
+			for( var r=0; r<rooms.Length; r++ ){
+				rooms[ r ].position = roomPosTargets[ r ];
+				rooms[ r ].localScale	= roomScaleTargets[ r ];
+			}
+			deck.localPosition = deckPosTarget;
+			hull.localPosition = hullPosTarget;
+		}
 	}
 }

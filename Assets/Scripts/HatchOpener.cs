@@ -1,8 +1,7 @@
 using UnityEngine;
 
 public class HatchOpener: MonoBehaviour{
-	private const float TableTravel = 0.6f;
-	public float speed = 2f;
+	private const float TableTravel = 0.6f, Speed = 30;
 	public Transform table;
 	private Vector3 initialTablePos;
 	private float angle = 0;
@@ -10,7 +9,7 @@ public class HatchOpener: MonoBehaviour{
 	private void Awake() => initialTablePos = table.localPosition;
 
 	private void Update(){
-		angle += speed;
+		angle += Time.deltaTime*Speed;
 		if( angle>360 )
 			angle -= 360;
 
