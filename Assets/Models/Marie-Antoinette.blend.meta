@@ -72,6 +72,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Galley Steps Material
+    second: {fileID: 2100000, guid: e3e80a55b7a99b94ba095a9e2b9953e9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Glass
     second: {fileID: 2100000, guid: c8011b7a285b18f48a5415feabd9164a, type: 2}
   - first:
@@ -107,6 +112,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: f2a2e768b9807034fa8ab7afd1506f94, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Material.002
     second: {fileID: 2100000, guid: 94044c86942a3e64bab75fb824a30426, type: 2}
   - first:
@@ -132,6 +142,16 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Material.008
+    second: {fileID: 2100000, guid: 6bb736e7e85e11f4d870358f1c51f8df, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.010
+    second: {fileID: 2100000, guid: f6729d8d7d0d718428b027b861767dc3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Material.013
     second: {fileID: 2100000, guid: 807c154b3bf43fa4f9ae3cad67695992, type: 2}
   - first:
@@ -139,6 +159,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Material.014
     second: {fileID: 2100000, guid: 1eb98efba58ba874dae146fe39460ab4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.015
+    second: {fileID: 2100000, guid: d0c1ecdc0da64e64c9905dbda1438b08, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.016
+    second: {fileID: 2100000, guid: aa6cd60f1d1bc844d9d45663ed75044e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -177,6 +207,16 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Material.024
+    second: {fileID: 2100000, guid: 6c8795d808b39cd438e2b0ed2e12ce35, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.025
+    second: {fileID: 2100000, guid: d47d6be14b155464c97c5eef43e99a2a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Material.026
     second: {fileID: 2100000, guid: e75ca1bad5ca81b498b6ca723a81ac5b, type: 2}
   - first:
@@ -184,6 +224,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Material.027
     second: {fileID: 2100000, guid: d040b542abd068a479826bd1e4096601, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.028
+    second: {fileID: 2100000, guid: c18001dc863831f4fab4f97fc57b8c80, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -222,6 +267,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Sink Material
+    second: {fileID: 2100000, guid: 0420624cbe4ac444f9a7d295300d6421, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Stern Material
     second: {fileID: 2100000, guid: 0543b5deee2fda54b8cb815108b150b7, type: 2}
   - first:
@@ -239,6 +289,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Washing Machine Material
     second: {fileID: 2100000, guid: 6e2189b1a08626b4c89fdf50e3eee4fe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood Material
+    second: {fileID: 2100000, guid: 808217157fd8ac74ab62f6072dfa60ff, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
