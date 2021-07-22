@@ -2,15 +2,20 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class RotationControls: MonoBehaviour{
-	private const float ZoomSpeed = 1f, ZoomMin = 15, ZoomMax = 85;
+	private const float ZoomSpeed = .5f, ZoomMin = -14, ZoomMax = 7, LerpDuration = .5f;
 	public float dragSpeed = .25f, orbitSpeed = 0.025f;
 	private bool isRotating = true;
-	public Transform spotlight;
+	public Transform spotlight, camDolly;
 	private Camera cam;
 	private Vector3 prevMousePos = Vector3.zero, mousePosDelta = Vector3.zero;
 	private bool isDragging = false;
+	private float timeElapsed = LerpDuration, startCamZ, targetCamZ;
 
-	private void Awake() => cam = Camera.main;
+	private void Awake(){
+		cam = Camera.main;
+		camDolly = cam.transform.parent;
+		startCamZ = targetCamZ = Mathf.Clamp( cam.transform.localPosition.z, ZoomMin, ZoomMax );
+	}
 
 	public void SetRotating( bool value ) => isRotating = value;
 
@@ -24,17 +29,28 @@ public class RotationControls: MonoBehaviour{
 
 		if( isDragging ){
 			mousePosDelta = ( Input.mousePosition-prevMousePos )*dragSpeed;
-			if( Vector3.Dot( cam.transform.up, Vector3.up ) > 0 )
-				cam.transform.RotateAround( spotlight.position, Vector3.up, Vector3.Dot( mousePosDelta, Vector3.right ) );
+			if( Vector3.Dot( camDolly.transform.up, Vector3.up ) > 0 )
+				camDolly.transform.RotateAround( spotlight.position, Vector3.up, Vector3.Dot( mousePosDelta, Vector3.right ) );
 			else
-				cam.transform.RotateAround( spotlight.position, Vector3.up, Vector3.Dot( mousePosDelta, Vector3.left ) );
-			cam.transform.RotateAround( spotlight.position, cam.transform.right, Vector3.Dot( mousePosDelta, Vector3.down ) );
+				camDolly.transform.RotateAround( spotlight.position, Vector3.up, Vector3.Dot( mousePosDelta, Vector3.left ) );
+			camDolly.transform.RotateAround( spotlight.position, camDolly.transform.right, Vector3.Dot( mousePosDelta, Vector3.down ) );
 			prevMousePos = Input.mousePosition;
 		}else if( isRotating )
-			cam.transform.RotateAround( spotlight.position, Vector3.up, orbitSpeed );
+			camDolly.transform.RotateAround( spotlight.position, Vector3.up, orbitSpeed );
 
 		var scrollwheelDelta = Input.mouseScrollDelta;
-		if( scrollwheelDelta.y!=0 && !eventSystem.IsPointerOverGameObject() )
-			cam.fieldOfView = Mathf.Clamp( cam.fieldOfView-scrollwheelDelta.y*ZoomSpeed, ZoomMin, ZoomMax );
+		if( scrollwheelDelta.y!=0 && !eventSystem.IsPointerOverGameObject() ){
+			startCamZ = cam.transform.localPosition.z;
+			targetCamZ = Mathf.Clamp( targetCamZ+scrollwheelDelta.y*ZoomSpeed, ZoomMin, ZoomMax );
+			timeElapsed = 0;
+		}
+
+		var time = timeElapsed/LerpDuration;
+		time = time * time * ( 3f-2f*time );
+		if( timeElapsed<LerpDuration ){
+			cam.transform.localPosition = new Vector3( 0, 0, Mathf.Lerp( startCamZ, targetCamZ, time ) );
+			timeElapsed += Time.deltaTime;
+		}else if( cam.transform.localPosition.z!=targetCamZ )
+			cam.transform.localPosition = new Vector3( 0, 0, targetCamZ );
 	}
 }
