@@ -37,6 +37,21 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Chocofur_free_Beds_01.002
+    second: {fileID: 2100000, guid: c76ab8a13dd798d488d452d75b155e2e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chocofur_free_Beds_01.003
+    second: {fileID: 2100000, guid: bf180490e0e8a264284a3ff8ce0e7d84, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chocofur_free_Beds_01.004
+    second: {fileID: 2100000, guid: 8221e882c85704b4193790ce04fa8e57, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Chromium
     second: {fileID: 2100000, guid: 9d784a789a041634fb88be9ed94ad901, type: 2}
   - first:
@@ -47,8 +62,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Closet Material
+    second: {fileID: 2100000, guid: aaee93273cde4ba49a9c7aa355afdddf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Cockpit Material
     second: {fileID: 2100000, guid: 82115386ae022c945ade8db49873e478, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Control Panel Material
+    second: {fileID: 2100000, guid: d3f386b0bc4fdd94199f8f11563a83cf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Counters Material
+    second: {fileID: 2100000, guid: 5844e584542192449a926d73c70721fe, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -252,6 +282,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Quarter Steps Material
+    second: {fileID: 2100000, guid: 2d373123017f9ba4192d92a6397743e9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Quarters Material
     second: {fileID: 2100000, guid: a49e29f1f1347ce46aaf9df582690511, type: 2}
   - first:
@@ -264,6 +299,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Salon Material
     second: {fileID: 2100000, guid: 89a2411cee4a8394d982fcaee0010b8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Salon Steps Material
+    second: {fileID: 2100000, guid: d70a3538e3665f34bb99b7ebc835dcb3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
