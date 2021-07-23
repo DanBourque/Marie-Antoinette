@@ -287,6 +287,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Quarters Head Material
+    second: {fileID: 2100000, guid: aa5b5e37e74023a4586579353fc28117, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Quarters Material
     second: {fileID: 2100000, guid: a49e29f1f1347ce46aaf9df582690511, type: 2}
   - first:
