@@ -17,6 +17,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Bed Drawers Material
+    second: {fileID: 2100000, guid: 2670e4e16ddd4174f8a36a65a4c31d06, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Black Shiny Bump
     second: {fileID: 2100000, guid: 95a8e8a1086250f4b8fc7ced6ef4e1e0, type: 2}
   - first:
@@ -84,6 +89,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Deck Material
     second: {fileID: 2100000, guid: f3cc578377dc8864a8d71420923fbaa9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Drawers Material
+    second: {fileID: 2100000, guid: 04c0041ba8be5c24482dc2a1bd67d357, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -272,6 +282,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Overhead Bins Material
+    second: {fileID: 2100000, guid: 8f7271ded68c2fd4ba314728d1754096, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Plastic_Clear_.001
     second: {fileID: 2100000, guid: 0cedc79103dede04684e3520f270d1f2, type: 2}
   - first:
@@ -329,6 +344,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Utility Closet Material
     second: {fileID: 2100000, guid: 801673f2db9bc05458959343a029a112, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall
+    second: {fileID: 2100000, guid: 9079a06f021aabe4e90efa7d26526621, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

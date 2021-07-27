@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public enum Room{ ChainLocker, EngineRoom, Galley, GuestCabin, Quarters, Sailroom, Salon }
 
 public class RoomSelector: MonoBehaviour{
-	private const float LerpDuration = 2, DeckExpandedY = 2f, HullExpandedY = -3.1f, ExpandedScale = 1.5f;
+	private const float LerpDuration = 2, DeckExpandedY = 3f, HullExpandedY = -4.1f, ExpandedScale = 1.75f;
 	public Transform hull, deck, spotlight;
 	public Transform[] rooms;
 	public RectTransform[] photoStrips;
