@@ -42,6 +42,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Chocofur_free_Beds_01
+    second: {fileID: 2100000, guid: c11301e03378cba47a26601714f86b92, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Chocofur_free_Beds_01.002
     second: {fileID: 2100000, guid: c76ab8a13dd798d488d452d75b155e2e, type: 2}
   - first:
@@ -87,8 +92,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Cushion Material
+    second: {fileID: 2100000, guid: 0dbfb9c62fc26dd4dbb6ccf8cd348b02, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Debug Material 2
+    second: {fileID: 2100000, guid: 5fe81af90e7f1744582ca2556c2e48b0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Deck Material
     second: {fileID: 2100000, guid: f3cc578377dc8864a8d71420923fbaa9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Deck Material.001
+    second: {fileID: 2100000, guid: f2e01ad503962734fbbfdcadb6e00c08, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -292,6 +312,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Plywood
+    second: {fileID: 2100000, guid: 81fe068a9d2e0e84795e8ada9369fc40, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Propeller Material
     second: {fileID: 2100000, guid: 0dc35b13c7d23c1499937ad67e44482e, type: 2}
   - first:
@@ -349,6 +374,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Wall
     second: {fileID: 2100000, guid: 9079a06f021aabe4e90efa7d26526621, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall 2
+    second: {fileID: 2100000, guid: 6dc13aaea7b15b44e9855124d3241f74, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
