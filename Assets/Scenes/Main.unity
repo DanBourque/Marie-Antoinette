@@ -6628,11 +6628,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7448136141902708837, guid: 8254a5df2865703418a9e4d85c1e38de, type: 3}
   m_PrefabInstance: {fileID: 1142854681}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1155590677 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3767255758212565322, guid: 3b4b47a2b506bc840991c566d41fe45a, type: 3}
-  m_PrefabInstance: {fileID: 1213855108}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1164941489
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6816,9 +6811,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23bf74e1538d6224891e9485850b5bf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomsSlideoutPanel: {fileID: 233113602}
-  photosSlideoutPanel: {fileID: 1542442121}
-  xraySlideoutPanel: {fileID: 2054529946}
 --- !u!1001 &1168926657
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7358,7 +7350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3767255758212565322, guid: 3b4b47a2b506bc840991c566d41fe45a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b4b47a2b506bc840991c566d41fe45a, type: 3}
@@ -10056,7 +10048,6 @@ MonoBehaviour:
   - {fileID: 2042324530}
   - {fileID: 1654445129}
   - {fileID: 1382355059}
-  - {fileID: 1155590677}
 --- !u!1001 &1736850557
 PrefabInstance:
   m_ObjectHideFlags: 0
