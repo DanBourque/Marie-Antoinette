@@ -8,13 +8,13 @@ public enum Axis{ X, Y, Z }
 public class XRayControls: MonoBehaviour{
 	private const string PlanePosition = "_PlanePosition", PlaneNormal = "_PlaneNormal";
 	private const float ScanCoverage = 2f;	// x2 is 100% coverage. 
-	private Dictionary< Axis, Slider > sliders = new Dictionary< Axis, Slider >();
-	private Dictionary< Axis, float > extents = new Dictionary< Axis, float >{ { Axis.X, 2.25f }, { Axis.Y, 2.17f }, { Axis.Z, 6.85f } };
+	private Dictionary< Axis, Slider > sliders = new();
+	private Dictionary< Axis, float > extents = new(){ { Axis.X, 2.25f }, { Axis.Y, 2.17f }, { Axis.Z, 6.85f } };
 	private Shader defaultShader;
 	public Shader xrayShader;
-	private HashSet< Material > materials = new HashSet< Material >();
+	private HashSet< Material > materials = new();
 	public Transform patient, plane;
-	private bool materialsInitialized = false;
+	private bool materialsInitialized;
 
 	private void Awake(){
 		defaultShader = Shader.Find( "Universal Render Pipeline/Lit" );

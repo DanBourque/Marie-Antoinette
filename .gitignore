@@ -16,7 +16,8 @@
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
 
-# Visual Studio cache directory
+# JetBrains Rider and Visual Studio cache directories
+.idea/
 .vs/
 
 # Gradle cache directory
@@ -59,3 +60,5 @@ crashlytics-build.properties
 *.blend1
 *.blend1.meta
 
+# The default windows layout
+/[Uu]ser[Ss]ettings/Layouts/default-2022.dwlt
